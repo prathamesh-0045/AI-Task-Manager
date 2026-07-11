@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({
+const api = axios.create({
   baseURL: "https://ai-task-manager-backend-9o7v.onrender.com/api",
 });
 
