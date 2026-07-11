@@ -13,8 +13,10 @@ import com.example.service.GeminiService;
 
 @RestController
 @RequestMapping("/api/ai")
-@CrossOrigin(origins = "http://localhost:5173")
-
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://ai-task-manager1-chi.vercel.app"
+})
 public class AiController {
 
     private final GeminiService geminiService;

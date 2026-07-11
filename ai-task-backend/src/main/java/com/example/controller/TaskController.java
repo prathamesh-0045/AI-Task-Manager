@@ -16,11 +16,12 @@ import com.example.dto.TaskRequest;
 import com.example.entity.Task;
 import com.example.service.TaskService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://ai-task-manager1-chi.vercel.app"
+})
 public class TaskController {
 
     private final TaskService taskService;

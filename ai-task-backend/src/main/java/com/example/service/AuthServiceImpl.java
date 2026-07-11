@@ -1,15 +1,13 @@
 package com.example.service;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.example.dto.AuthResponse;
 import com.example.dto.LoginRequest;
 import com.example.dto.RegisterRequest;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.security.JwtService;
-
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -44,19 +42,36 @@ public class AuthServiceImpl implements AuthService {
 
         return "Registered Successfully";
     }
+@Override
+public AuthResponse login(LoginRequest request) {
 
-    @Override
-    public AuthResponse login(LoginRequest request) {
+    try {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        System.out.println("User Found: " + user.getEmail());
+
+        boolean matches = passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword()
+        );
+
+        System.out.println("Password Match: " + matches);
+
+        if (!matches) {
             throw new RuntimeException("Invalid Password");
         }
 
         String token = jwtService.generateToken(user.getEmail());
 
+        System.out.println("Token Generated");
+
         return new AuthResponse(token);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw e;
     }
+}
 }
