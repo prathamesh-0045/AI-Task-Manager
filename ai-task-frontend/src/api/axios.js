@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:8080/api",
+const API = axios.create({
+  baseURL: "https://ai-task-manager-backend-9o7v.onrender.com/api",
 });
 
 api.interceptors.request.use((config) => {

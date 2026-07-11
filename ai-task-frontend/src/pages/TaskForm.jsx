@@ -8,39 +8,8 @@ function TaskForm({ loadTasks }) {
   const [status, setStatus] = useState("TODO");
   const [dueDate, setDueDate] = useState("");
 
-  // Generate AI
+  
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
-    await taskService.createTask({
-      title,
-      description,
-      priority,
-      status,
-      dueDate,
-    });
-
-    loadTasks();
-
-    setTitle("");
-    setDescription("");
-    setPriority("MEDIUM");
-    setStatus("TODO");
-    setDueDate("");
-
-    alert("Task Created Successfully");
-  } catch (error) {
-    console.error(error);
-
-    if (error.response) {
-      console.log(error.response.data);
-    }
-
-    alert("Task Creation Failed");
-  }
-};
   // Add Task
   const handleSubmit = async (e) => {
     e.preventDefault();
